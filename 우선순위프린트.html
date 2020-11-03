@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우선순위 프린트</title>
+</head>
+<body>
+    <script>
+        let test = [2, 1, 3, 2];
+        let test2 = [1, 1, 9, 1, 1, 1];
+        let test3 = [1, 2, 4, 7, 8, 3, 2, 1, 6, 9];
+        
+        function solution(priorities, location) {
+            let temp = [];
+            let answer = 0;
+            let result = [];
+            for(let i = 0; i < priorities.length; i++){
+                temp[i] = {
+                    number : i,
+                    prior : priorities[i],
+                }
+            }
+            
+            while(result.length !== priorities.length){
+                let max = temp[0];
+                let index = 0;
+
+                for(let i = 1; i < temp.length; i++){
+                    if(max.prior < temp[i].prior){
+                        max = temp[i];
+                        index = i;
+                    }
+                }
+
+                if(index !== 0){
+                    for(let j = 0; j < index; j++){
+                        temp.push(temp.shift());
+                    }
+                }
+                
+                result.push(temp.shift());
+                console.log(result)
+                for(let i in result){
+                    if(result[i].number === location){
+                        answer = parseInt(i) + 1;
+                    }
+                }
+            }
+
+            return answer;
+        }
+
+        console.log(solution(test3 , 9)); // 1
+    </script>
+</body>
+</html>

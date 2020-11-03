@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스파이</title>
+</head>
+<body>
+    <script>
+        let clothes1 = [['yellow_hat', 'headgear'], ['blue_sunglasses', 'eyewear'], ['green_turban', 'headgear']];
+        let clothes2 = [['crow_mask', 'face'], ['blue_sunglasses', 'face'], ['smoky_makeup', 'face']];
+
+        function solution(clothes) {
+            var answer = 1;
+            var sorted = {};
+            for(let i = 0; i < clothes.length; i++){
+                if(sorted[clothes[i][1]]){
+                    sorted[clothes[i][1]] += 1
+                }else{
+                    sorted[clothes[i][1]] = 1
+                }                  
+            }  
+            
+            for(let i in sorted){
+                answer *= (sorted[i] + 1); // 옷을 입지않을 경우의 수 + 1
+            }            
+
+            return answer - 1; // 옷을 입지않을 경우의 수는 제외
+        }
+
+        //console.log(solution(clothes1)); // 5
+        console.log(solution(clothes2)); // 3 
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시저암호</title>
+</head>
+<body>
+    <script>
+        let s = 'b E f';
+        let n = 4;
+        
+        function solution(s, n) {
+            var answer = '';
+            n = n % 26;
+            let str = s.split('');
+            for(let i = 0; i < str.length; i++){
+                if(str[i] === ' '){
+                    continue;
+                }else if(str[i] === str[i].toLowerCase()){
+                    let ch = ((str[i].charCodeAt() - 'a'.charCodeAt() + n) % 26) + 'a'.charCodeAt();
+                    str[i] = String.fromCharCode(ch);
+                }else if(str[i] === str[i].toUpperCase()){
+                    let ch = ((str[i].charCodeAt() - 'A'.charCodeAt() + n) % 26) + 'A'.charCodeAt();
+                    str[i] = String.fromCharCode(ch);
+                }
+            }
+            answer = str.join('');
+            return answer;
+        }
+
+        console.log(solution(s,n));
+    </script>
+</body>
+</html>

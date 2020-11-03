@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let sentence1 = 'asfe watabw wetbawe wentetz ewntzsdg abssaewb poiepkgld.';
+        let sentence2 = 'abcde fghijkl mnopqrstuvwxyz.';
+
+        function solution1(sentence){
+            let alphabets = [];
+            let temp = [];
+            let answer = [];
+            let set = new Set();
+            
+            for(let i = 0; i <= 'z'.charCodeAt() - 'a'.charCodeAt();  i++){
+                alphabets[i] = String.fromCharCode('a'.charCodeAt() + i);
+            }
+
+            let str = sentence.toLowerCase();
+            for(let i = 0; i < str.length; i++){
+                if(str[i] >= 'a' && str[i] <= 'z'){
+                    set.add(str[i]);
+                }
+            }
+            
+            temp = Array.from(set);
+            temp.sort((a,b) => {
+                if(a > b) return 1;
+                else return -1;
+            });
+
+            if(temp.length === alphabets.length){
+                answer = 'perfect';
+                return answer;
+            }
+
+            let j = 0;
+            for(let i = 0; i < temp.length; i++){
+                if(temp[i] === alphabets[j]){
+                    j++;
+                    continue;
+                }else{
+                    while(temp[i] !== alphabets[j]){
+                        answer.push(alphabets[j]);
+                        j++;
+                    }
+                    j++;
+                }
+            }
+
+            answer = answer.join('');
+
+            return answer
+        }
+
+        function solution2(sentence){
+            let alphabets = [];
+            
+            let temp = [];
+            let answer = [];
+            let set = new Set();
+            
+            for(let i = 0; i <= 'z'.charCodeAt() - 'a'.charCodeAt();  i++){
+                alphabets.push(String.fromCharCode('a'.charCodeAt() + i));
+            }
+
+            let str = sentence.toLowerCase();
+            for(let i = 0; i < str.length; i++){
+                if(str[i] >= 'a' && str[i] <= 'z'){
+                    set.add(str[i]);
+                }
+            }
+
+            for(let i = 0; i < alphabets.length; i++){
+                if(set.has(alphabets[i])){
+                    continue;
+                }else{
+                    answer.push(alphabets[i]);
+                }
+            }
+
+            if(answer.length === 0){
+                answer = 'perfect';
+                return answer;
+            }
+
+            answer = answer.join('');
+            return answer;
+        }
+
+        console.log(solution1(sentence1));
+        console.log(solution1(sentence2));
+
+        console.log(solution2(sentence1));
+        console.log(solution2(sentence2));
+    </script>
+</body>
+</html>

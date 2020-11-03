@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str1 = "FRANCE";
+        let str2 = "FRENCH";
+
+        function solution(str1, str2) {
+            var answer = 0;
+            let arr1 = [];
+            let arr2 = [];
+            let union = 0;
+            let intersection = 0; 
+            for(let i = 0; i < str1.length - 1; i++){               
+                arr1.push(str1.substr(i, 2).toUpperCase());
+            }
+            for(let i = 0; i < str2.length - 1; i++){             
+                arr2.push(str2.substr(i, 2).toUpperCase());
+            }
+
+            arr1 = check(arr1);
+            arr2 = check(arr2);
+
+            if(arr1.length < arr2.length){
+                for(let i = 0; i < arr1.length; i++){
+                    for(let j = 0; j < arr2.length; j++){
+                        if(arr1[i] === arr2[j]){
+                            union++;
+                        }
+                    }
+                }
+            }else{
+                for(let i = 0; i < arr2.length; i++){
+                    for(let j = 0; j < arr1.length; j++){
+                        if(arr2[i] === arr1[j]){
+                            union++;
+                        }
+                    }
+                }
+            }
+              
+            intersection = arr1.concat(arr2).length - union;
+            if(union === 0){
+                return 65536;
+            }
+            answer = parseInt((union / intersection) * 65536);
+            return answer;
+        }
+
+        function check(arr){
+            let str = [];
+            for(let i = 0; i < arr.length; i++){
+                let temp = arr[i].split('');
+                let count = 0;
+                for(let j in temp){
+                    if(temp[j] >= 'A' && temp[j] <= 'Z'){
+                        count++;
+                    }
+                }
+                if(count === 2){
+                    str.push(arr[i]);
+                }
+            }
+            return str;
+        }
+
+        console.log(solution(str1, str2));
+    </script>
+</body>
+</html>

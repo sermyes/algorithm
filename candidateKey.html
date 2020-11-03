@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후보키</title>
+</head>
+<body>
+    <script>
+        function solution1(relation) {
+            let answer = 0;
+            let attrNum = relation[0].length;
+            let combList = [];
+            let keyList = [];
+
+            // 조합 배열 생성
+            for (let i = 1; i <= attrNum; i++){
+                comb(combList, [], 0, attrNum, i, 0);
+                console.log(combList);
+            }
+            
+
+            // 각 조합에 따라 후보 키가 가능한지 체크하고 추가
+            for (let i=0; i<combList.length; i++){
+                addKey(keyList, combList[i],relation);
+            }
+
+            console.log(keyList);
+            return keyList.length;
+        }
+
+        function addKey(keyList, key, relation){
+            // 최소성 체크
+            // 이미 등록된 후보키의 배열을 포함하는 배열이 하나라도 존재하면 최소성 X
+            let isMin = true;
+            for (let i=0; i<keyList.length; i++){
+                let prevKey = keyList[i];
+                for (let j=0; j<key.length; j++){
+                    prevKey = prevKey.filter(ele=> ele !==key[j]);
+                }
+                if(prevKey.length === 0){
+                    isMin = false;
+                }
+            }
+
+            // 등록한 후보키가 하나도 없으면 최소성이 항상 만족되므로 패스
+            if (keyList.length !== 0 && !isMin){
+                return;
+            }
+            let arr = [];
+            let isUnique = true;
+
+            // 유일성 체크
+            // 키로 사용했을 때 하나라도 중복되면 유일성 X
+            for (let i = 0; i < relation.length; i++){                
+                let findEle = arr.find(ele => {
+                    let flag = true;
+                    for (let j=0; j< key.length; j++){
+                        if (ele[key[j]] !== relation[i][key[j]])
+                            flag = false;
+                    }
+                    return flag;
+                })
+                if (findEle !== undefined){
+                    isUnique = false;
+                }else{
+                    arr.push(relation[i]);
+                }
+            }
+
+            // 유일성 만족하면 후보키로 등록
+            if(isUnique){
+                keyList.push(key);
+            }
+        
+        }
+
+        // 조합 배열 생성
+        function comb(list, arr, idx, attrNum, i, target){
+            // comb(combList, [], 0, attrNum, i, 0);
+            if (i === 0){
+                list.push(Object.assign([], arr));
+            }else if (target === attrNum){
+                return ;
+            }else{
+                arr[idx] = target;
+                comb(list, arr, idx + 1, attrNum, i - 1, target + 1);
+                comb(list, arr, idx, attrNum, i, target + 1);
+            }
+        }
+
+        // ------------------------------------------------------
+
+        function solution2(relation) {
+            const cols = relation[0].length // attr개수
+            const rows = relation.length // tuple개수
+            const sets = 1 << cols // 0001 0000, 최대조합 개수(16)
+            const sk = new Set();
+
+            for (let i = 1; i < sets; i++) {
+                const tmp = new Set();
+                for (let row = 0; row < rows; row++) {
+                    let key = '';
+                    for (let col = 0; col < cols; col++) {
+                        if (i & (1 << col)){
+                            key += relation[row][col];
+                        }
+                    }
+                    tmp.add(key);
+                }
+                if (tmp.size === rows){
+                    sk.add(i); // 유일한 조합목록
+                    // console.log(i); // 10개
+                }
+            }
+            
+            for (let i of sk) {
+                for (let j of sk) {
+                    // console.log(i, j); // sk의 값들
+                    if (i >= j){
+                        continue;
+                    }
+
+                    if ((i & j) === i){
+                        sk.delete(j); // 최소성체크
+                    }
+                }
+            }
+        
+            console.log(Array.from(sk).map(value => value.toString(2))); // 2진수로변환
+
+            return sk.size
+        }
+
+        // ----------------------------------------------------------
+
+        console.log(solution2([
+            ["100","ryan","music","2"],
+            ["200","apeach","math","2"],
+            ["300","tube","computer","3"],
+            ["400","con","computer","4"],
+            ["500","muzi","music","3"],
+            ["600","apeach","music","2"]
+        ]));
+    </script>
+</body>
+</html>
