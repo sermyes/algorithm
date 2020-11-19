@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>완주못한선수</title>
+</head>
+<body>
+    <script>
+        function solution(participant, completion) {
+            let map = new Map();
+            for(let i in participant){
+                map.set(participant[i], (map.get(participant[i]) || 0) + 1);
+                map.set(completion[i], (map.get(completion[i]) || 0) - 1);
+            }
+            for(let [key, v] of map){
+                if(v >= 1) return key;
+            }
+        }
+
+        function solution2(participant, completion){
+            let hash = [];
+            participant.forEach(key => hash[key] = hash[key] ? hash[key] + 1 : 1);
+            completion.forEach(key => hash[key] = hash[key] ? hash[key] - 1 : 1);
+            for(let key in hash){
+                if(hash[key]){
+                    return key;
+                }
+            }
+        }
+        //console.log(solution(['leo', 'kiki', 'eden'],['eden', 'kiki']));
+        //console.log(solution2(["marina", "josipa", "nikola", "vinko", "filipa"], ["josipa", "filipa", "marina", "nikola"]));
+        console.log(solution2(["mislav", "stanko", "mislav", "ana"], ["stanko", "ana", "mislav"]));
+    </script>
+</body>
+</html>

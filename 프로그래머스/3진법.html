@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3진법</title>
+</head>
+<body>
+    <script>
+        function solution(n) {
+            let ternary = [];
+            let base = n;
+            let rest = 0;
+            let answer = 0;
+            while(base >= 3){
+                rest = base % 3;
+                base = parseInt(base / 3);
+                ternary.push(rest);  
+            }
+            ternary.push(base);
+
+            for(let i = 0; i < ternary.length; i++){
+                answer += ternary[i] * Math.pow(3, ternary.length-i-1);
+            }
+
+            return answer;
+        }
+
+        //console.log(solution(45));
+        console.log(solution(125));
+    </script>
+</body>
+</html>

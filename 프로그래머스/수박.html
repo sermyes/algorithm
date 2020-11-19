@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수박</title>
+</head>
+<body>
+    <script>
+        function solution(n){
+            let arr = Array(n).fill('').map((v, i) => {
+                if(i % 2 === 0){
+                    return '수';
+                }else{
+                    return '박';
+                }}
+            );
+            return arr.join('');
+        }
+        console.log(solution(5));
+        //console.log(solution());
+        //console.log(solution());
+    </script>
+</body>
+</html>

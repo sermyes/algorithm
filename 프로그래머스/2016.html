@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2016 요일 맞추기</title>
+</head>
+<body>
+    <script>
+        function solution(a, b) {
+            let weekDay = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+            let month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            let days = 0;
+            for(let i = 0; i < a - 1; i++){
+                days += month[i];
+            }
+            days += (b - 1); // 1월 1일은 금요일 이므로 -1
+            let answer = weekDay[days % 7];
+            return answer;
+        }
+        
+        console.log(solution(5,24));
+    </script>
+</body>
+</html>

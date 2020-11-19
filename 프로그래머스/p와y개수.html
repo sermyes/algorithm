@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 내 p와 y의 개수</title>
+</head>
+<body>
+    <script>
+        function solution(s){
+            let p = s.split('').filter(v => v === 'p' || v === 'P');
+            let y = s.split('').filter(v => v === 'y' || v === 'Y');
+            
+            return p.length === y.length;
+        }
+
+        console.log(solution('pPoooyY'));
+        // console.log(solution('pyY'));
+    </script>
+</body>
+</html>

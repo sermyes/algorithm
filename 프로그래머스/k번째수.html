@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>k번쨰수</title>
+</head>
+<body>
+    <script>
+        function solution(array, commands) {
+            let answer = [];
+            answer = commands.map(arr => {
+                return array.slice(arr[0] - 1, arr[1]).sort((a, b) => a - b)[arr[2] - 1];
+            });
+            return answer;
+        }
+        console.log(solution([1, 5, 2, 6, 3, 7, 4],	[[2, 5, 3], [4, 4, 1], [1, 7, 3]]));
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가운데수</title>
+</head>
+<body>
+    <script>
+        function solution(s) {
+            let answer = '';
+            if(s.length % 2 === 0){
+                return answer = s.split('').slice(s.length/2 - 1, s.length/2 + 1).join('');
+            }else{
+                return answer = s.split('').slice(Math.floor(s.length/2), Math.ceil(s.length/2)).join('');
+            }
+            
+        }
+        console.log(solution('abcde'));
+        //console.log(solution('qwer'));
+    </script>
+</body>
+</html>

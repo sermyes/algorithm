@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자연수뒤집어서 배열로만들기</title>
+</head>
+<body>
+    <script>
+        function solution(n) {
+            return n.toString().split('').map(v=>parseInt(v)).reverse();
+        }
+        console.log(solution(12189418156));
+    </script>
+</body>
+</html>

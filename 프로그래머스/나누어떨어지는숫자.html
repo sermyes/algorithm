@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나누어 떨어지는 숫자 반환 배열</title>
+</head>
+<body>
+    <script>
+        function solution(arr, divisor) {
+            var answer = [];
+            answer = arr.filter((v) => v % divisor === 0);
+
+            if(!answer.length){
+                return [-1];
+            }
+
+            answer.sort((a,b) => a-b);
+            return answer;
+        }
+
+        console.log(solution([5, 9, 7, 10], 5));
+        console.log(solution([3,2,6], 10));
+    </script>
+</body>
+</html>

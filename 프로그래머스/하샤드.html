@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하샤드 수</title>
+</head>
+<body>
+    <script>
+        function solution(x){
+            let n = x.toString().split('').reduce((acc, value) => {
+                return acc + parseInt(value);
+            }, 0);
+            return x % n === 0;
+            console.log(numbers);
+        }
+
+        console.log(solution(11));
+    </script>
+</body>
+</html>

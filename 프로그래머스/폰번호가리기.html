@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰번호 가리기</title>
+</head>
+<body>
+    <script>
+        function solution(phone_number){
+            let result = phone_number.split('').map((v, i) => {
+                if(i < phone_number.length - 4){
+                    return '*';
+                }else{
+                    return v;
+                }
+            }).join('');
+            return result;
+        }
+
+        console.log(solution('01033334444'));
+    </script>
+</body>
+</html>

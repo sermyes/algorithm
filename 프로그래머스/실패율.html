@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실패율</title>
+</head>
+<body>
+    <script>
+        function solution(N, stages) {
+            let map = new Map();
+            let m = stages.length;
+            let result = [];
+            for(let i = 0; i < stages.length; i++){
+                map.set(stages[i], map.get(stages[i]) + 1 || 1);
+            }
+            for(let i = 1; i <= N; i++){
+                if(!map.get(i)){
+                    result.push({stage: i, rate: 0});
+                    continue;
+                }
+                result.push({stage: i, rate: map.get(i) / m});
+                m -= map.get(i);
+            }
+            result = result.sort((a, b) => b.rate - a.rate ).map(v => v.stage);
+            
+            
+            return result;
+        }
+        // console.log(solution(5, [2, 1, 2, 6, 2, 4, 3, 3]));
+        console.log(solution(4, [4, 4, 4, 4]));
+    </script>
+</body>
+</html>
